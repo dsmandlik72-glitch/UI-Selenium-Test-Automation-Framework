@@ -138,22 +138,49 @@ public abstract class BrowserUtility {
 		return element.getText();
 	}
 
+//	public String takeScreenShot(String name) {
+//		TakesScreenshot screenshot = (TakesScreenshot) driver.get();
+//		File screenshotData = screenshot.getScreenshotAs(OutputType.FILE);
+//		Date date = new Date();
+//		SimpleDateFormat format = new SimpleDateFormat("HH-mm-ss");
+//		String timeStamp = format.format(date);
+//		String path = "./screenshots/" + name + " - " + timeStamp + ".png";
+//		File screenshotFile = new File(path);
+//		try {
+//			FileUtils.copyFile(screenshotData, screenshotFile);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return path;
+//	}
+	
 	public String takeScreenShot(String name) {
-		TakesScreenshot screenshot = (TakesScreenshot) driver.get();
-		File screenshotData = screenshot.getScreenshotAs(OutputType.FILE);
-		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("HH-mm-ss");
-		String timeStamp = format.format(date);
-		String path = "./screeshots/" + name + " - " + timeStamp + ".png";
-		File screenshotFile = new File(path);
-		try {
-			FileUtils.copyFile(screenshotData, screenshotFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return path;
+
+	    File folder = new File("./screenshots");
+
+	    if (!folder.exists()) {
+	        folder.mkdirs();
+	    }
+
+	    TakesScreenshot ts = (TakesScreenshot) driver.get();
+
+	    File src = ts.getScreenshotAs(OutputType.FILE);
+
+	    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
+	            .format(new Date());
+
+	    String path = "./screenshots/" + name + "_" + timeStamp + ".png";
+
+	    try {
+	        FileUtils.copyFile(src, new File(path));
+	    } catch (IOException e) {
+	        throw new RuntimeException("Unable to save screenshot", e);
+	    }
+
+	    return path;
 	}
+	
 	public void quit() {
 	    if (driver.get() != null) {
 	        logger.info("Closing browser");
