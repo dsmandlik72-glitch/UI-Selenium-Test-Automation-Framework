@@ -29,7 +29,7 @@ public class TestBase {
 	public void setup(
 			@Optional("chrome") String browser,
 			@Optional("false") boolean isLambdaTest,
-			@Optional("true") boolean isHeadless,
+			@Optional("false") boolean isHeadless,
 			ITestResult result) {
 		
 		this.isLambdaTest=isLambdaTest;
@@ -57,7 +57,7 @@ public class TestBase {
 			LambdaTestUtility.quitSession();//Quit or close the browsersession on LT
 		}
 		else {
-			homePage.quit();//Local
+			//homePage.quit();//Local
 		}
 	}
 	
