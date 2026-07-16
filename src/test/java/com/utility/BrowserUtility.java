@@ -308,18 +308,18 @@ public abstract class BrowserUtility {
 		return path;
 	}
 
-//	public void quit() {
-//		if (driver.get() != null) {
-//			logger.info("Closing browser");
-//			driver.get().quit();
-//			driver.remove(); // Very important when using ThreadLocal
-//		}
-//	}
-//
-//	public void close() {
-//		if (driver.get() != null) {
-//			logger.info("Closing current browser window");
-//			driver.get().close();
-//		}
-//	}
+	public void quit() {
+		if (driver.get() != null) {
+			logger.info("Closing browser");
+			driver.get().quit();
+			driver.remove(); // Very important when using ThreadLocal
+		}
+	}
+
+	public void close() {
+		if (driver.get() != null) {
+			logger.info("Closing current browser window");
+			driver.get().close();
+		}
+	}
 }
